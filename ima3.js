@@ -24217,28 +24217,54 @@
         })
     };
     var xW = function(a, b) {
-        var c = b.adTagUrl || "",
-            d = c.includes("GOOGLE_INSTREAM_VIDEO_NONCE"),
-            e = tW(a.K),
-            f = e.then(function(l) {
-                if (rp(UD)) {
-                    var n = Po();
-                    n = E(n, Lo, 4);
-                    n = n == null ? void 0 : kg(n, 2)
-                } else n = !1;
-                l = l || {};
-                var p = !1;
-                p = p === void 0 ? !1 : p;
-                n = n === void 0 ? !1 : n;
-                var q = new IE(c);
-                var u = q.j;
-                (q = Ab(q.g, "googleads.g.doubleclick.net") && SF("/pagead/(live/)?ads", u)) || (u = new $J(c), q = u.g, u = aK(u, u.j), q = !Ab(q, ".g.doubleclick.net") && (Ab(q, "doubleclick.net") || Ab(q, "pagead2.googlesyndication.com")) && SF("/(ad|pfad)[x|i|j]?/", u));
-                q || (q = new IE(c),
-                    u = q.j, q = Ab(q.g, "doubleclick.net") && SF("/gampad/(live/)?ads", u));
-                (q = q || (new IE(c)).g == "bid.g.doubleclick.net") || (q = new IE(c), u = q.j, q = q.g === "ad.doubleclick.net" && SF("/dv3/adv", u));
-                q || (q = new IE(c), u = q.j, q = q.g === "pubads.g.doubleclick.net" && (SF("/ssai/", u) || SF("/ondemand/", u)));
-                return new DK(q, BK(c), l, p, n)
-            });
+    var c = b.adTagUrl;
+    if (typeof c !== 'string') {
+        try {
+            c = String(c);
+        } catch (err) {
+            c = '';
+        }
+    }
+
+    var d = c.includes("GOOGLE_INSTREAM_VIDEO_NONCE"),
+        e = tW(a.K),
+        f = e.then(function(l) {
+            if (rp(UD)) {
+                var n = Po();
+                n = E(n, Lo, 4);
+                n = n == null ? void 0 : kg(n, 2);
+            } else n = !1;
+
+            l = l || {};
+            var p = !1;
+            p = p === void 0 ? !1 : p;
+            n = n === void 0 ? !1 : n;
+
+            var q = new IE(c);
+            var u = q.j;
+
+            (q = Ab(q.g, "doubleclick.net") && SF("/gampad/(live/)?ads", u))
+            || (u = new $J(c), q = u.g, u = aK(u, u.j),
+                q = !Ab(q, ".g.doubleclick.net")
+                    && (Ab(q, "doubleclick.net") || Ab(q, "pagead2.googlesyndication.com"))
+                    && SF("/(ad|pfad)[x|i|j]?/", u));
+
+            q || (q = new IE(c), u = q.j,
+                q = Ab(q.g, "doubleclick.net") && SF("/gampad/(live/)?ads", u));
+
+            (q = q || (new IE(c)).g == "bid.g.doubleclick.net")
+            || (q = new IE(c), u = q.j,
+                q = q.g === "ad.doubleclick.net" && SF("/dv3/adv", u));
+
+            q || (q = new IE(c), u = q.j,
+                q = q.g === "pubads.g.doubleclick.net"
+                    && (SF("/ssai/", u) || SF("/ondemand/", u)));
+
+            return new DK(q, BK(c), l, p, n);
+        });
+
+    return f;
+};
         f.then(function(l) {
             YR(l, function() {
                 zW(a, l)
