@@ -24443,7 +24443,7 @@
             }
         })
     }
-    ;(vW.prototype.getSettings = function() {
+    (vW.prototype.getSettings = function() {
     return uK;
 });
 
