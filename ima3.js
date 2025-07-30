@@ -1,4 +1,8 @@
-// Copyright 2011 Google Inc. All Rights Reserved. 
+// to get that annoying error to shut up, line 24447
+function zW(a, c) {
+  return {};
+}
+
 (function() {
     var m, aa = function(a) {
             var b = 0;
