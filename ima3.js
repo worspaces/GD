@@ -24444,16 +24444,14 @@ function zW(a, c) {
             return {
                 data: IV(b, l, p, q, u, w, G, X, S, Aa, Li),
                 Ga: p
-            }
-        })
-    }
+            };
 zW = function(a, b) {
 };
 CW = function(a, b) {
     var c = a.F.get(b);
     a.F.delete(b);
     return c != null ? c : null;
-},
+};
 wW = function(a, b, c) {
     var evt = new RU(new PU(b), CW(a, c));
     R.prototype.dispatchEvent.call(a, evt);
@@ -24462,7 +24460,7 @@ wW = function(a, b, c) {
         vis: wm(document)
     };
     W.getInstance().report(7, reportData);
-},
+};
 yW = function(a, b, c, d) {
     // listen for all ad-loader messages on this channel
     var adEventChannel = ZT(a.j, b);
