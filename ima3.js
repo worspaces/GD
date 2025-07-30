@@ -24445,7 +24445,7 @@
     }
     (vW.prototype.getSettings = function() {
     return uK;
-});
+})
 
 vW.prototype.contentComplete = function() {
     zL(ZT(this.j), "adsLoader", "contentComplete");
