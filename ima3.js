@@ -24448,11 +24448,6 @@ function zW(a, c) {
         })
     }
 zW = function(a, b) {
-    b = rM(JK(b));
-    if (b) {
-        a.G.espSignals = b;
-        zL(ZT(a.j), "adsLoader", "signalsRefresh", a.G);
-    }
 };
 CW = function(a, b) {
     var c = a.F.get(b);
@@ -24823,31 +24818,3 @@ AW = function(a, b, c) {
         }
     };
 })();
-
-var BW = function(a, b, c) {
-    if (b.length !== 0) {
-        b = ZR(
-            b.map(function(d) {
-                return { Qg: d, zk: false, yk: false };
-            }),
-            c
-        );
-        if (b) {
-            b.forEach(function(d) {
-                d.then(function(e) {
-                    if (e) {
-                        zW(a, c);
-                    }
-                });
-            });
-        }
-    }
-};
-
-vW.prototype.getSettings = function() {
-  return uK;
-};
-
-vW.prototype.contentComplete = function() {
-  zL(ZT(this.j), "adsLoader", "contentComplete");
-};
