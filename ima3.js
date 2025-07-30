@@ -24443,42 +24443,54 @@
             }
         })
     }
-    ;vW.prototype.getSettings = function() {
-        return uK
-    };
-    vW.prototype.contentComplete = function() {
-        zL(ZT(this.j), "adsLoader", "contentComplete")
-    };
-    var BW = function(a, b, c) {
-            b.length !== 0 && (b = ZR(b.map(function(d) {
-                return {
-                    Qg: d,
-                    zk: !1,
-                    yk: !1
-                }
-            }), c)) && b.forEach(function(d) {
+    ;(vW.prototype.getSettings = function() {
+    return uK;
+});
+
+vW.prototype.contentComplete = function() {
+    zL(ZT(this.j), "adsLoader", "contentComplete");
+};
+
+var BW = function(a, b, c) {
+    if (b.length !== 0) {
+        b = ZR(
+            b.map(function(d) {
+                return { Qg: d, zk: false, yk: false };
+            }),
+            c
+        );
+        if (b) {
+            b.forEach(function(d) {
                 d.then(function(e) {
-                    e && zW(a, c)
-                })
-            })
-        },
-        zW = function(a, b) {
-            if (b = rM(JK(b))) a.G.espSignals = b, zL(ZT(a.j), "adsLoader", "signalsRefresh", a.G)
-        },
-        CW = function(a, b) {
-            var c = a.F.get(b);
-            a.F.delete(b);
-            return c != null ? c : null
-        },
-        wW = function(a, b, c) {
-            c = new RU(new PU(b), CW(a, c));
-            R.prototype.dispatchEvent.call(a, c);
-            a = {
-                error: b.errorCode,
-                vis: wm(document)
-            };
-            W.getInstance().report(7, a)
-        },
+                    if (e) {
+                        zW(a, c);
+                    }
+                });
+            });
+        }
+    }
+},
+zW = function(a, b) {
+    b = rM(JK(b));
+    if (b) {
+        a.G.espSignals = b;
+        zL(ZT(a.j), "adsLoader", "signalsRefresh", a.G);
+    }
+},
+CW = function(a, b) {
+    var c = a.F.get(b);
+    a.F.delete(b);
+    return c != null ? c : null;
+},
+wW = function(a, b, c) {
+    var evt = new RU(new PU(b), CW(a, c));
+    R.prototype.dispatchEvent.call(a, evt);
+    var reportData = {
+        error: b.errorCode,
+        vis: wm(document)
+    };
+    W.getInstance().report(7, reportData);
+};
         yW = function(a, b, c, d) {
             b = ZT(a.j, b);
             a.H.listen(b,
