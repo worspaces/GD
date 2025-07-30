@@ -24443,15 +24443,6 @@
             }
         })
     }
-    // attach methods directly, no stray parentheses
-;vW.prototype.getSettings = function() {
-    return uK;
-};
-
-vW.prototype.contentComplete = function() {
-    zL(ZT(this.j), "adsLoader", "contentComplete");
-};
-
 var BW = function(a, b, c) {
     if (b.length !== 0) {
         b = ZR(
@@ -24847,3 +24838,11 @@ AW = function(a, b, c) {
         }
     };
 })();
+
+vW.prototype.getSettings = function() {
+  return uK;
+};
+
+vW.prototype.contentComplete = function() {
+  zL(ZT(this.j), "adsLoader", "contentComplete");
+};
