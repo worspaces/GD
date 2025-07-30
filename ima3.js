@@ -24449,7 +24449,7 @@
 
 (vW.prototype.contentComplete = function() {
     zL(ZT(this.j), "adsLoader", "contentComplete");
-});
+})
 
 var BW = function(a, b, c) {
     if (b.length !== 0) {
