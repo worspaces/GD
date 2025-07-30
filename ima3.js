@@ -24443,13 +24443,14 @@
             }
         })
     }
-    (vW.prototype.getSettings = function() {
+    // attach methods directly, no stray parentheses
+vW.prototype.getSettings = function() {
     return uK;
-})
+};
 
-(vW.prototype.contentComplete = function() {
+vW.prototype.contentComplete = function() {
     zL(ZT(this.j), "adsLoader", "contentComplete");
-})
+};
 
 var BW = function(a, b, c) {
     if (b.length !== 0) {
@@ -24490,71 +24491,88 @@ wW = function(a, b, c) {
         vis: wm(document)
     };
     W.getInstance().report(7, reportData);
-};
-        yW = function(a, b, c, d) {
-            b = ZT(a.j, b);
-            a.H.listen(b,
-                "adsLoader",
-                function(e) {
-                    var f = e.messageType;
-                    switch (f) {
-                        case "adsLoaded":
-                            f = e.ua;
-                            e = e.Pc;
-                            f = new Z(a.g, a.o, f.adTagUrl || "", f.adCuePoints, a.A, f.isCustomClickTrackingAllowed, ZT(a.j, e), c);
-                            e = new oW(f, CW(a, e));
-                            R.prototype.dispatchEvent.call(a, e);
-                            break;
-                        case "error":
-                            wW(a, e.ua, e.Pc);
-                            break;
-                        case "cookieUpdate":
-                            e = e.ua;
-                            if (e == null) break;
-                            if (uK.isCookiesEnabled()) {
-                                f = new AK;
-                                f = ug(f, 5, !0);
-                                var g = e.gfpCookie;
-                                g && iV(a.C, "__gads", dW(g), f);
-                                (g = e.gfpCookieV2) && iV(a.C, "__gpi", dW(g), f)
-                            }
-                            if (g = e.eoidCookie) {
-                                f = new dV;
-                                g = dW(g);
-                                var h = sm(ng(g,
-                                    2)) - Date.now() / 1E3;
-                                h = {
-                                    od: Math.max(h, 0),
-                                    path: pg(g, 3),
-                                    domain: pg(g, 4),
-                                    Hd: !1
-                                };
-                                cV("__eoi", g.getValue(), h, f.g)
-                            }
-                            BW(a, e.encryptedSignalBidderIds || [], c);
-                            break;
-                        case "trackingUrlPinged":
-                            R.prototype.dispatchEvent.call(a, new TU(f, null, e.ua))
-                    }
-                });
-            zL(b, "adsLoader", "requestAds", d)
-        },
-        AW = function(a, b, c) {
-            var d, e;
-            return Qa(function(f) {
-                if (f.g == 1) return Ea(f, c, 2);
-                if (f.g != 3) {
-                    d = f.j;
-                    if (IK(d)) return a.l = null, f.return();
-                    if (!b) return f.return();
-                    a.l || (a.l = new vL, wL(a.l));
-                    return Ea(f, a.l.getId(), 3)
+},
+yW = function(a, b, c, d) {
+    // listen for all ad-loader messages on this channel
+    var adEventChannel = ZT(a.j, b);
+    a.H.listen(adEventChannel, "adsLoader", function(e) {
+        switch (e.messageType) {
+            case "adsLoaded":
+                var ua = e.ua, Pc = e.Pc;
+                var adObj = new Z(
+                    a.g,
+                    a.o,
+                    ua.adTagUrl || "",
+                    ua.adCuePoints,
+                    a.A,
+                    ua.isCustomClickTrackingAllowed,
+                    ZT(a.j, Pc),
+                    c
+                );
+                var adsEvent = new oW(adObj, CW(a, Pc));
+                R.prototype.dispatchEvent.call(a, adsEvent);
+                break;
+            case "error":
+                wW(a, e.ua, e.Pc);
+                break;
+            case "cookieUpdate":
+                var upd = e.ua;
+                if (upd == null) break;
+                if (uK.isCookiesEnabled()) {
+                    var ak = ug(new AK(), 5, true);
+                    upd.gfpCookie && iV(a.C, "__gads", dW(upd.gfpCookie), ak);
+                    upd.gfpCookieV2 && iV(a.C, "__gpi", dW(upd.gfpCookieV2), ak);
                 }
-                e = f.j;
-                uK.A = e.id || "";
-                f.g = 0
-            })
-        };
+                if (upd.eoidCookie) {
+                    var dv = new dV();
+                    var gVal = dW(upd.eoidCookie);
+                    var ttl = sm(ng(gVal, 2)) - Date.now() / 1e3;
+                    var opts = {
+                        od: Math.max(ttl, 0),
+                        path: pg(gVal, 3),
+                        domain: pg(gVal, 4),
+                        Hd: false
+                    };
+                    cV("__eoi", gVal.getValue(), opts, dv.g);
+                }
+                BW(a, e.encryptedSignalBidderIds || [], c);
+                break;
+            case "trackingUrlPinged":
+                R.prototype.dispatchEvent.call(
+                    a,
+                    new TU(adObj, null, e.ua)
+                );
+                break;
+        }
+    });
+    zL(adEventChannel, "adsLoader", "requestAds", d);
+},
+AW = function(a, b, c) {
+    var d, e;
+    return Qa(function(f) {
+        if (f.g === 1) {
+            return Ea(f, c, 2);
+        }
+        if (f.g !== 3) {
+            d = f.j;
+            if (IK(d)) {
+                a.l = null;
+                return f.return();
+            }
+            if (!b) {
+                return f.return();
+            }
+            if (!a.l) {
+                a.l = new vL();
+                wL(a.l);
+            }
+            return Ea(f, a.l.getId(), 3);
+        }
+        e = f.j;
+        uK.A = e.id || "";
+        f.g = 0;
+    });
+};
     vW.prototype.contentComplete = vW.prototype.contentComplete;
     vW.prototype.getSettings = vW.prototype.getSettings;
     vW.prototype.requestAds = vW.prototype.requestAds;
