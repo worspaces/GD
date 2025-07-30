@@ -24442,7 +24442,7 @@
                 Ga: p
             }
         })
-    };
+    }
     vW.prototype.getSettings = function() {
         return uK
     };
