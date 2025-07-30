@@ -24444,7 +24444,7 @@
         })
     }
     // attach methods directly, no stray parentheses
-vW.prototype.getSettings = function() {
+;vW.prototype.getSettings = function() {
     return uK;
 };
 
