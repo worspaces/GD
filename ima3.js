@@ -24808,12 +24808,10 @@ AW = function(a, b, c) {
                 pageUrl: UW
             };
         try {
-            var xS = BS();
-            if (!xS) throw Error("Could not generate config URL");
-            zS()
-        } catch (a) {
-            yS(wS, a)
-        }
-    };
-        }
+    var xS = BS();
+    if (!xS) throw Error("Could not generate config URL");
+    zS();
+} catch (a) {
+    yS(wS, a);
+}
 })();
