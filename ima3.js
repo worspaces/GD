@@ -24810,9 +24810,9 @@ AW = function(a, b, c) {
         try {
             var xS = BS();
             if (!xS) throw Error("Could not generate config URL");
-            zS();
+            zS()
         } catch (a) {
-            yS(wS, a);
+            yS(wS, a)
         }
     };
         }
