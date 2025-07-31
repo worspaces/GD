@@ -1,8 +1,4 @@
-// to get that annoying error to shut up, line 24447
-function zW(a, c) {
-  return {};
-}
-
+// Copyright 2011 Google Inc. All Rights Reserved. 
 (function() {
     var m, aa = function(a) {
             var b = 0;
@@ -1487,9 +1483,9 @@ function zW(a, c) {
         var Pc = "",
             Qc = function() {
                 var a = Rb();
-                if (Fc/*)*/ return /rv:([^\);]+)(\)|;)/.exec(a);
+                if (Fc) return /rv:([^\);]+)(\)|;)/.exec(a);
                 if (Ec) return /Edge\/([\d\.]+)/.exec(a);
-                if (Dc/*/*)*/*/ return /\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/.exec(a);
+                if (Dc) return /\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/.exec(a);
                 if (Gc) return /WebKit\/(\S+)/.exec(a);
                 if (Cc) return /(?:Version)[ \/]?(\S+)/.exec(a)
             }();Qc && (Pc = Qc ? Qc[1] : "");
@@ -5072,7 +5068,7 @@ function zW(a, c) {
         return K(L)
     };
     var Xm = function(a) {
-            return /^\s*$/.test(a) ? !1 : /^[\/*/*/*]*/*/*/,:{}\s\u2028\u2029]*$/.test(a.replace(/\\["\\\/bfnrtu]/g, "@").replace(/(?:"[^"\\\n\r\u2028\u2029\x00-\x08\x0a-\x1f]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)[\s\u2028\u2029]*(?=:|,|]|}|$)/g, "]").replace(/(?:^|:|,)(?:[\s\u2028\u2029]*\[)+/g, ""))
+            return /^\s*$/.test(a) ? !1 : /^[\],:{}\s\u2028\u2029]*$/.test(a.replace(/\\["\\\/bfnrtu]/g, "@").replace(/(?:"[^"\\\n\r\u2028\u2029\x00-\x08\x0a-\x1f]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)[\s\u2028\u2029]*(?=:|,|]|}|$)/g, "]").replace(/(?:^|:|,)(?:[\s\u2028\u2029]*\[)+/g, ""))
         },
         Ym = function(a) {
             try {
@@ -24444,14 +24440,49 @@ function zW(a, c) {
             return {
                 data: IV(b, l, p, q, u, w, G, X, S, Aa, Li),
                 Ga: p
-            };
-zW = function(a, b) {
+            }
+        })
+    }
+    // attach methods directly, no stray parentheses
+;vW.prototype.getSettings = function() {
+    return uK;
 };
+
+vW.prototype.contentComplete = function() {
+    zL(ZT(this.j), "adsLoader", "contentComplete");
+};
+
+var BW = function(a, b, c) {
+    if (b.length !== 0) {
+        b = ZR(
+            b.map(function(d) {
+                return { Qg: d, zk: false, yk: false };
+            }),
+            c
+        );
+        if (b) {
+            b.forEach(function(d) {
+                d.then(function(e) {
+                    if (e) {
+                        zW(a, c);
+                    }
+                });
+            });
+        }
+    }
+},
+zW = function(a, b) {
+    b = rM(JK(b));
+    if (b) {
+        a.G.espSignals = b;
+        zL(ZT(a.j), "adsLoader", "signalsRefresh", a.G);
+    }
+},
 CW = function(a, b) {
     var c = a.F.get(b);
     a.F.delete(b);
     return c != null ? c : null;
-};
+},
 wW = function(a, b, c) {
     var evt = new RU(new PU(b), CW(a, c));
     R.prototype.dispatchEvent.call(a, evt);
@@ -24460,7 +24491,7 @@ wW = function(a, b, c) {
         vis: wm(document)
     };
     W.getInstance().report(7, reportData);
-};
+},
 yW = function(a, b, c, d) {
     // listen for all ad-loader messages on this channel
     var adEventChannel = ZT(a.j, b);
@@ -24815,91 +24846,4 @@ AW = function(a, b, c) {
             yS(wS, a)
         }
     };
-        }
-/*}*/)();
-
-// Auto-closed missing brackets
-))))))))]
-
-// stubber
-
-;(function(){
-  if (!Array.prototype.includes) {
-    Array.prototype.includes = function() { return false; };
-  }
-  if (!String.prototype.includes) {
-    String.prototype.includes = function() { return false; };
-  }
-
-  window.addEventListener('error', e => { e.stopImmediatePropagation(); e.preventDefault(); return false; }, true);
-  window.addEventListener('unhandledrejection', e => { e.preventDefault(); return false; }, true);
-
-  const _origConsole = window.console;
-  console.error = ()=>{};
-  console.info  = ()=>{};
-  console.debug = ()=>{};
-  console.table = ()=>{};
-  console.trace = ()=>{};
-  console.group     =
-  console.groupEnd  = ()=>{};
-
-  const _origFetch = window.fetch;
-  window.fetch = (...args) => Promise.resolve({
-    ok: true,
-    status: 200,
-    json: ()=>Promise.resolve({}),
-    text: ()=>Promise.resolve('{}')
-  });
-
-  function FakeXHR(){
-    this.readyState  = 4;
-    this.status      = 200;
-    this.responseText= '{}';
-    setTimeout(()=>{
-      this.onreadystatechange && this.onreadystatechange();
-      this.onload       && this.onload();
-    },0);
-  }
-  FakeXHR.prototype.open             =
-  FakeXHR.prototype.send             =
-  FakeXHR.prototype.setRequestHeader = ()=>{};
-  window.XMLHttpRequest = FakeXHR;
-
-  navigator.sendBeacon = ()=>true;
-  window.Image = function(){
-    setTimeout(()=> this.onload && this.onload(), 0);
-    this.onerror = ()=>{};
-  };
-
-  window.addEventListener('error', function(evt){
-    evt.preventDefault();
-    evt.stopImmediatePropagation();
-    return false;
-  }, true);
-  window.addEventListener('unhandledrejection', function(evt){
-    evt.preventDefault();
-    return false;
-  }, true);
-
-  const NOOP = function(){};
-  if (typeof LO   !== "function") window.LO   = NOOP;
-  if (typeof Je   === "undefined") window.Je   = { stringify: JSON.stringify };
-  window.eventBus = window.eventBus || { broadcast: NOOP };
-
-  var proto = (window.N4 && window.N4.prototype) || {};
-  proto._send_gametag_data  = proto._send_gametag_data    || NOOP;
-  proto._isMasterGameURL    = proto._isMasterGameURL      || (()=>false);
-  proto._isExtHostedGameURL = proto._isExtHostedGameURL   || (()=>false);
-  proto.adInstance = proto.adInstance || {};
-  ["_hideAddResume","_hideAdSpinner","_clearTimeoutForSkipAddButton"]
-    .forEach(m=> proto.adInstance[m] = proto.adInstance[m] || NOOP);
-
-  window.fetch = window.fetch;
-  window.XMLHttpRequest = FakeXHR;
-
-  const _add = Element.prototype.addEventListener;
-  Element.prototype.addEventListener = function(type, listener, opts){
-    if (type === "DOMNodeInserted") return;
-    return _add.call(this, type, listener, opts);
-  };
 })();
